@@ -85,12 +85,16 @@ public class GPSUtils {
 
 		int secs;
 		double speed;
-
-		// TODO - START
-
-		throw new UnsupportedOperationException(TODO.method());
-
-		// TODO - SLUTT
+		double avstand = distance(gpspoint1, gpspoint2);
+		
+		secs = gpspoint1.getTime();		
+		secs += gpspoint2.getTime();
+		
+		
+		speed = (avstand/secs) * 3.6;
+		
+		
+		return speed;
 
 	}
 
@@ -98,11 +102,20 @@ public class GPSUtils {
 
 		String timestr;
 		String TIMESEP = ":";
-
-		// TODO - START
-		throw new UnsupportedOperationException(TODO.method());
 		
-		// TODO - SLUTT
+		
+		int h = secs / 3600;
+		secs %= 3600;
+		int m = secs / 60;
+		secs %= 60;
+		int s = secs;
+		
+		
+
+		timestr = String.format(" %02d%4$s%02d%4$s%02d" , h, m, s, TIMESEP);
+		timestr = " " + timestr;
+		
+		return timestr;
 
 	}
 	private static int TEXTWIDTH = 10;
@@ -110,12 +123,13 @@ public class GPSUtils {
 	public static String formatDouble(double d) {
 
 		String str;
+		
+		
+		str = String.format(java.util.Locale.US, "%10.2f", d);
 
-		// TODO - START
-
-		throw new UnsupportedOperationException(TODO.method());
-
-		// TODO - SLUTT
+		
+		return str;
+			
 		
 	}
 }
