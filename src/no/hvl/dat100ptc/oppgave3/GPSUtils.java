@@ -87,8 +87,8 @@ public class GPSUtils {
 		double speed;
 		double avstand = distance(gpspoint1, gpspoint2);
 		
-		secs = gpspoint1.getTime();		
-		secs += gpspoint2.getTime();
+		secs = gpspoint2.getTime();		
+		secs -= gpspoint1.getTime();
 		
 		
 		speed = (avstand/secs) * 3.6;

@@ -53,37 +53,53 @@ public class ShowRoute extends EasyGraphics {
 	// antall y-pixels per breddegrad
 	public double ystep() {
 	
-		double ystep;
+		double maxlat = GPSUtils.findMax(GPSUtils.getLatitudes(gpspoints));
+		double minlat = GPSUtils.findMin(GPSUtils.getLatitudes(gpspoints));
 		
-		// TODO - START
+		double ystep = MAPYSIZE / (Math.abs(maxlat - minlat));
 		
-		throw new UnsupportedOperationException(TODO.method());
-
-		// TODO - SLUTT
-		
+		return ystep;		
 	}
 
 	public void showRouteMap(int ybase) {
+		
+		double[] nx = new double[gpspoints.length];
+		double[] ny = new double[gpspoints.length];
+		
+		for(int i = 0; i < gpspoints.length; i++) {
+			nx[i] = gpspoints[i].getLongitude();
+			ny[i] = gpspoints[i].getLatitude();
+			drawCircle((int)nx[i], (int)ny[i], 10);
+		}
 
-		// TODO - START
+		setColor(0,250,0);
 		
-		throw new UnsupportedOperationException(TODO.method());
+	
 		
-		// TODO - SLUTT
+		
 	}
 
 	public void showStatistics() {
 
 		int TEXTDISTANCE = 20;
+		
 
 		setColor(0,0,0);
 		setFont("Courier",12);
 		
-		// TODO - START
+		int time = gpscomputer.totalTime();
+		double dist = gpscomputer.totalDistance();
+		double eleve = gpscomputer.totalElevation();
+		double mspeed = gpscomputer.maxSpeed();
+		double aspeed = gpscomputer.averageSpeed();
+		double kcal = gpscomputer.totalKcal(80);
 		
-		throw new UnsupportedOperationException(TODO.method());
+		String txt;
+
+				
 		
-		// TODO - SLUTT;
-	}
+		
+		}
+	
 
 }
