@@ -12,7 +12,7 @@ public class ShowRoute extends EasyGraphics {
 
 	private static int MARGIN = 50;
 	private static int MAPXSIZE = 800;
-	private static int MAPYSIZE = 800;
+	private static int MAPYSIZE = 600;
 
 	private GPSPoint[] gpspoints;
 	private GPSComputer gpscomputer;
@@ -65,14 +65,26 @@ public class ShowRoute extends EasyGraphics {
 		
 		double[] nx = new double[gpspoints.length];
 		double[] ny = new double[gpspoints.length];
-		
+		double nxmin = 0;
+		double nymin = 0;
 		for(int i = 0; i < gpspoints.length; i++) {
+			
 			nx[i] = gpspoints[i].getLongitude();
-			ny[i] = gpspoints[i].getLatitude();
-			drawCircle((int)nx[i], (int)ny[i], 10);
+			ny[i] = gpspoints[i].getLatitude();	
+			
+			nxmin =	GPSUtils.findMin(GPSUtils.getLongitudes(gpspoints));
+			nymin =	GPSUtils.findMin(GPSUtils.getLatitudes(gpspoints));
+			
+			double x = nx[i] - nxmin;
+			double y = ny[i] - nymin;
+			
+			
+			setColor(0,250,0);
+			fillCircle((MAPXSIZE+MARGIN) - (int) (x * xstep()), ybase -(int) (y * ystep()), 5);
+			
 		}
 
-		setColor(0,250,0);
+		
 		
 	
 		
@@ -87,19 +99,22 @@ public class ShowRoute extends EasyGraphics {
 		setColor(0,0,0);
 		setFont("Courier",12);
 		
-		int time = gpscomputer.totalTime();
-		double dist = gpscomputer.totalDistance();
-		double eleve = gpscomputer.totalElevation();
-		double mspeed = gpscomputer.maxSpeed();
-		double aspeed = gpscomputer.averageSpeed();
-		double kcal = gpscomputer.totalKcal(80);
+		String time = "Total Time     :" + GPSUtils.formatTime(gpscomputer.totalTime())+ " ";
+		String dist = "Total distance :" + GPSUtils.formatDouble(gpscomputer.totalDistance()/1000) + " km ";
+		String eleve = "Total elevation:"+ GPSUtils.formatDouble(gpscomputer.totalElevation()) + " m ";
+		String mspeed = "Max speed      :" + GPSUtils.formatDouble(gpscomputer.maxSpeed()) + " km/t ";
+		String aspeed = "Average speed  :" + GPSUtils.formatDouble(gpscomputer.averageSpeed())+ " km/t ";
+		String kcal = "Energy         :" + GPSUtils.formatDouble(gpscomputer.totalKcal(80)) + " kcal ";
 		
-		String txt;
-
-				
+		String[] tab = {time, dist, eleve, mspeed, aspeed, kcal};
 		
-		
+		for(int  i = 1; i <= tab.length; i++ ) {		
+			
+			drawString(tab[i-1], 10, i*TEXTDISTANCE);
+	
+			
 		}
+	}
 	
 
 }
