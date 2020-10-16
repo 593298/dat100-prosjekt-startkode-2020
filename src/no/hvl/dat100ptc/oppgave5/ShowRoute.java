@@ -67,7 +67,7 @@ public class ShowRoute extends EasyGraphics {
 		double[] ny = new double[gpspoints.length];
 		double nxmin = 0;
 		double nymin = 0;
-		for(int i = 0; i < gpspoints.length; i++) {
+		for(int i = 0; i < gpspoints.length ; i++) {
 			
 			nx[i] = gpspoints[i].getLongitude();
 			ny[i] = gpspoints[i].getLatitude();	
@@ -80,7 +80,7 @@ public class ShowRoute extends EasyGraphics {
 			
 			
 			setColor(0,250,0);
-			fillCircle((MAPXSIZE+MARGIN) - (int) (x * xstep()), ybase -(int) (y * ystep()), 5);
+			fillCircle((MARGIN) + (int) (x * xstep()), ybase -(int) (y * ystep()), 5);
 			
 		}
 

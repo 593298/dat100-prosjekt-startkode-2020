@@ -46,10 +46,9 @@ public class GPSComputer {
 		double elevation = 0;
 
 		for(int i = 1; i < getGPSPoints().length; i++) {
-			double temp = 0;
-			double temp2 = 0;
-			temp2 = gpspoints[i-1].getElevation();
-			temp = gpspoints[i].getElevation();
+			double temp = temp = gpspoints[i].getElevation();
+			double temp2 = gpspoints[i-1].getElevation();
+			
 			if(temp2 < temp) {
 			elevation += temp - temp2;
 			}
